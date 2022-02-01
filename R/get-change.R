@@ -42,7 +42,7 @@ get_change <- function(type = c(
   type <- grunnkrets_check(type, to)
 
   if (type == "bydel") {
-    message("*** Change table for bydel is not available in SSB Klass API ***\n")
+    stop(simpleError("*** Change table for bydel is not available in SSB Klass API ***\n"))
   }
 
   klass <- switch(type,
@@ -77,6 +77,7 @@ get_change <- function(type = c(
   listDT <- vector(mode = "list", length = nrow(tblRef))
 
   for (i in seq_len(nrow(tblRef))) {
+
     indFrom <- tblRef$V1[i]
     indTo <- tblRef$V2[i]
     yrFrom <- vecYr[indFrom]
@@ -87,25 +88,30 @@ get_change <- function(type = c(
 
     ## specify query
     chgQ <- list(from = dateFrom, to = dateTo)
-    chgGET <- httr::GET(chgUrl, query = chgQ)
+    chgGET <- httr::RETRY("GET", url = chgUrl, query = chgQ)
+    httr::warn_for_status(chgGET)
     chgTxt <- httr::content(chgGET, as = "text")
 
     chgJS <- tryCatch(
-      {
-        jsonlite::fromJSON(chgTxt)
-      },
-      error = function(err) {
-        message(
-          "*** Change table for ", type,
-          " doesn't exist. From ", dateFrom, " to ", dateTo, " ***"
-        )
-      }
+    {
+      jsonlite::fromJSON(chgTxt)
+    },
+    error = function(err) {
+      message(
+        "*** Change table for ", type,
+        " doesn't exist. From ", dateFrom, " to ", dateTo, " *** "
+      )
+    }
     )
 
     chgDT <- chgJS[[1]]
     data.table::setDT(chgDT)
 
-    if (code && nrow(chgDT) != 0) {
+    if (type == "grunnkrets"){
+      chgDT <- grunnkrets_00(chgDT)
+    }
+
+    if (nrow(chgDT) > 0 && code) {
       chgDT <- chgDT[oldCode != newCode]
     }
 
@@ -177,8 +183,10 @@ set_year <- function(x, to = TRUE) {
 
 grunnkrets_before_2002 <- function(dt, type, from = NULL){
   if (type == "grunnkrets"){
+    message("Grunnkrets codes change before 2002 are from the dataset `GrunnkretsBefore2002`")
     gks <- norgeo::GrunnkretsBefore2002[changeOccurred %in% from:2001]
     gks <- grunnkrets_8digits(gks)
+    gks <- grunnkrets_dirty(x = dt, y = gks)
     dt <- data.table::rbindlist(list(gks, dt), use.names = TRUE, fill = TRUE)
     dtCols <- c("oldCode", "oldName", "newCode", "newName", "changeOccurred")
     data.table::setcolorder(dt, dtCols)
@@ -188,7 +196,7 @@ grunnkrets_before_2002 <- function(dt, type, from = NULL){
 
 }
 
-## Ensure grunnkrets has 8 digits else add starts 0
+## Ensure grunnkrets has 8 digits else add leading 0
 grunnkrets_8digits <- function(dtg){
   digit1 <- digit2 <- NULL
 
@@ -205,4 +213,50 @@ grunnkrets_8digits <- function(dtg){
   dtg[, c("digit1", "digit2") := NULL]
 
   return(dtg)
+}
+
+## For unclean grunnkrets codes before 2002
+## Se Issue #61
+grunnkrets_dirty <- function(x, y){
+  # x - dataset before 2002
+  # y - dataset from GrunnkretsBefore2002
+  codeOut <- intersect(unique(y$oldCode), unique(x$oldCode))
+  y[!(oldCode %chin% codeOut)]
+}
+
+## Issue #65
+## Area code ends with 00 sometimes aren't included in code change
+## This make it standard that it will always be area codes
+grunnkrets_00 <- function(x){
+
+  grOld <- NULL
+
+  if (nrow(x) == 0){
+    return(x)
+  }
+
+  y <- copy(x)
+
+  x[, "grOld" := gsub("\\d{2}$", "00", oldCode)]
+  x[, "grNew" := gsub("\\d{2}$", "00", newCode)]
+
+  grCodeOld <- unique(gsub("\\d{2}$", "00", unique(x$oldCode)))
+  grCodeNew <- unique(gsub("\\d{2}$", "00", unique(x$newCode)))
+
+  idxOld <- !is.element(grCodeOld, x$oldCode)
+  idxNew <- !is.element(grCodeNew, x$newCode)
+
+  idxOld <- grCodeOld[idxOld]
+  idxNew <- grCodeOld[idxNew]
+
+  x <- x[grOld %chin% idxOld][!duplicated(grOld)]
+  colNames <- names(x)[-c(8,9)]
+  cols <- c("oldCode", "newCode")
+  x[, (cols) := NULL]
+  data.table::setnames(x, c("grOld", "grNew"), cols)
+  data.table::setcolorder(x, colNames)
+  x[, c("oldName", "newName") := "Nothing from API"]
+
+  x <- data.table::rbindlist(list(y, x))
+  x[!duplicated(x)]
 }

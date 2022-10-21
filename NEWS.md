@@ -1,3 +1,9 @@
+# norgeo 2.1.1
+- Update documentation.
+- Add startup message with version number.
+- Refactor some codes for cleanliness.
+- Change title to "Tracking Geocode Change of Regional Granularities in Norway".
+
 # norgeo 2.1.0
 - Clean up enumeration codes before 2002. Some codes that were already recoded
   could still exist after 2002. Those codes were excluded from the code change
@@ -81,8 +87,6 @@ function names and structure. But of course there are always errors and
 things that can be better... Anyway, `norgeo 1.3.3` before
 `norgeo 0.9.0` works but too ambitious to call it 1.3.3, but hopefully
 the second future version of `norgeo 1.3.3` will be much better :-)
-
-# norgeo (development version)
 
 ## `dev` branch
 

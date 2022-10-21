@@ -64,19 +64,12 @@ cast_geo <- function(year = NULL) {
 
   ## Merge geo code
   ## Add higher granularity that aren't available via correspond API
-  dt[
-    level == "bydel", kommune := gsub("\\d{2}$", "", code)
-  ][
-    level == "bydel", fylke := gsub("\\d{4}$", "", code)
-  ][
-    level == "bydel", bydel := code
-  ]
+  dt[level == "bydel", kommune := gsub("\\d{2}$", "", code)][
+    level == "bydel", fylke := gsub("\\d{4}$", "", code)][
+      level == "bydel", bydel := code]
 
-  dt[
-    level == "kommune", fylke := gsub("\\d{2}$", "", code)
-  ][
-    level == "kommune", kommune := code
-  ]
+  dt[level == "kommune", fylke := gsub("\\d{2}$", "", code)][
+    level == "kommune", kommune := code]
 
   ## Only run this after adding lower granularity
   ## else it will overwrite kommune and bydel
@@ -112,7 +105,7 @@ cast_geo <- function(year = NULL) {
 #'   level codes and their corresponding higher geographical levels. For example
 #'   for codes on enumeration areas and their corresponding codes for
 #'   municipalities or town.
-#' @export
+#' @keywords internal
 find_correspond <- function(type, correspond, from) {
   ## type: Higher granularity eg. fylker
   ## correspond: Lower granularity eg. kommuner
@@ -125,7 +118,7 @@ find_correspond <- function(type, correspond, from) {
     stat$from <- from
     from <- from - 1
   }
-  message("Data for ", correspond, " to ", type, " is from ", stat$from, " with ", stat$rows, " rows")
+  message("Data for ", correspond, " to ", type, " in ", stat$from, " have ", stat$rows, " rows")
   return(dt)
 }
 

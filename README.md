@@ -62,4 +62,4 @@ for instance, the municipality has grown in 2020 with the inclusion of
 Lardal. Therefore the code for Larvik has changed twice. How about
 Holmestrand? When there are more than 350 municipalities with different
 code changes, then tracking these can be a nightmare. The same with
-enumeration units ie. *grunnkrets* with 14000 units!
+enumeration units ie. *grunnkrets* with 14000 units\!

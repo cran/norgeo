@@ -1,7 +1,7 @@
-aca96a7a8838e6392e764dadc142d44c *DESCRIPTION
+43e0711a8ec815172ec906f7b1ebcf6f *DESCRIPTION
 10aa7fc703934ebd8e84f42165c327d5 *LICENSE
 21f7d7d2bcaa0bb0a782e0cde42e59f3 *NAMESPACE
-c0fab160efd0545c5ac2336f1cd08afe *NEWS.md
+3561e49f3d2062e8df3c24a17183f423 *NEWS.md
 a48f076ebc21d597a6f5fb00e09f016e *R/cast-geo.R
 a56fd93929249a5add1b36428ddfcbf7 *R/data.R
 a150bed8ac40eddd616da54149aa4890 *R/env.R
@@ -22,7 +22,7 @@ e70e13e45e12784f6dcf69b5ea28e5a8 *data/GrunnkretsBefore2002.rda
 471daa7c8707e77717a11b43b0e6d58c *inst/doc/use-api.R
 1a32d65efa7d78d8de3970180ca4f53e *inst/doc/use-api.Rmd
 a6656c3aacff21ce03c5ebe1849267cf *inst/doc/use-api.html
-b2a01394c865b9844744bc299c97c38b *inst/test-data/cast_2020.rds
+604f242aa3eade1171a6915652ac6130 *inst/test-data/cast_2020.rds
 079ce9bcd8e284f8f69c27b14942e9ae *inst/test-data/change-dt.rds
 93fe7e045f72279d92ba2d0849f52e11 *inst/test-data/codeAt.rds
 ac6aabea64c8e040c0a0384304460d1d *inst/test-data/codes-fromto.rds

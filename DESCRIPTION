@@ -1,6 +1,6 @@
 Package: norgeo
 Title: Tracking Geo Code Change of Regional Granularity in Norway
-Version: 2.1.4
+Version: 2.1.5
 Authors@R: 
     person(given = "Yusman",
            family = "Kamaleri",
@@ -17,7 +17,7 @@ Description: Regional granularity levels in Norway which are depicted by differe
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Imports: data.table (>= 1.14.0), odbc, DBI, magrittr, RSQLite, writexl,
         httr, jsonlite
 Suggests: testthat (>= 3.0.0), pkgdown, vcr (>= 0.6.0), knitr,
@@ -28,8 +28,8 @@ VignetteBuilder: knitr
 Depends: R (>= 3.5.0)
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2022-12-21 12:56:00 UTC; YBKA
+Packaged: 2023-04-11 12:11:42 UTC; ybka
 Author: Yusman Kamaleri [aut, cre] (<https://orcid.org/0000-0001-5014-3665>)
 Maintainer: Yusman Kamaleri <ybkamaleri@gmail.com>
 Repository: CRAN
-Date/Publication: 2022-12-21 13:50:01 UTC
+Date/Publication: 2023-04-11 13:00:03 UTC

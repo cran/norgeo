@@ -1,6 +1,6 @@
 Package: norgeo
 Title: Tracking Geo Code Change of Regional Granularity in Norway
-Version: 2.1.5
+Version: 2.1.6
 Authors@R: 
     person(given = "Yusman",
            family = "Kamaleri",
@@ -28,8 +28,8 @@ VignetteBuilder: knitr
 Depends: R (>= 3.5.0)
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2023-04-11 12:11:42 UTC; ybka
+Packaged: 2023-04-23 11:10:01 UTC; ybka
 Author: Yusman Kamaleri [aut, cre] (<https://orcid.org/0000-0001-5014-3665>)
 Maintainer: Yusman Kamaleri <ybkamaleri@gmail.com>
 Repository: CRAN
-Date/Publication: 2023-04-11 13:00:03 UTC
+Date/Publication: 2023-04-23 21:40:11 UTC

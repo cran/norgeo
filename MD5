@@ -1,7 +1,7 @@
-33704111cfd0ae4abd3176bc69ce913b *DESCRIPTION
+5d9c1f138f4a0a7be504a351c312633f *DESCRIPTION
 10aa7fc703934ebd8e84f42165c327d5 *LICENSE
 21f7d7d2bcaa0bb0a782e0cde42e59f3 *NAMESPACE
-120edc811ca841df43071a1d708f41fd *NEWS.md
+3131aee02dea5f0880f972040eb3f7c0 *NEWS.md
 b3af3886188bf4640afad3445ed4c558 *R/cast-geo.R
 a56fd93929249a5add1b36428ddfcbf7 *R/data.R
 a150bed8ac40eddd616da54149aa4890 *R/env.R
@@ -58,8 +58,8 @@ cdffc583a5522ad02090f22a184cf40a *man/track_merge.Rd
 6909d19accbd36b13bce144332469b17 *tests/testthat.R
 b1d2ad4dbada53f374ace87f2452bbb0 *tests/testthat/setup-norgeo.R
 6ede493d000ff320acc9602694647e3f *tests/testthat/test-Save_file.R
-f4ed51f85aa72953948f69be05269b30 *tests/testthat/test-cast-geo.R
-219e790149919fc8254b8f8c028eb7c6 *tests/testthat/test-get-change.R
+b0d3aebd56f868e4f37ef4a8b9f3980b *tests/testthat/test-cast-geo.R
+048732e7528608f1653d8c49ecf3b5c5 *tests/testthat/test-get-change.R
 0b962e0bfa22562944ebd433e5f97f8c *tests/testthat/test-get-code.R
 956b441d386e00d5bc63866d8ea730c3 *tests/testthat/test-get-correspond.R
 a73aed5ad21be3fdf83a2f279c9f56da *tests/testthat/test-track-change.R

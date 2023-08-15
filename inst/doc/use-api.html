@@ -343,21 +343,24 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>This is a simple guide to access data via API. Regional granularity
 levels includes:</p>
 <ul>
-<li>Enumeration areas (<em>grunnkrets</em>)</li>
-<li>Cities (<em>bydel</em>)</li>
-<li>Municipalities (<em>kommune</em>)</li>
-<li>Counties (<em>fylke</em>)</li>
+<li>Enumeration areas (<em>grunnkretser</em>)</li>
+<li>Cities (<em>bydeler</em>)</li>
+<li>Municipalities (<em>kommuner</em>)</li>
+<li>Counties (<em>fylker</em>)</li>
 </ul>
-<div id="download-data-with-api" class="section level1">
-<h1>Download data with API</h1>
+<div id="download-geo-codes" class="section level1">
+<h1>Download geo codes</h1>
 <p>All functions that have <code>get_</code> prefix access data directly
 via <a href="https://data.ssb.no/api/klass/v1/api-guide.html">SSB
-API</a>. This is the simple guide to use <em>norgeo</em> API function to
-get codes for municipalities with selected time period:</p>
+API</a>. This is the simple guide to use <em>norgeo</em> API functions
+to get codes for municipalities with selected time period:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(norgeo)</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">get_code</span>(<span class="st">&quot;kommune&quot;</span>, <span class="at">from =</span> <span class="dv">2015</span>, <span class="at">to =</span> <span class="dv">2021</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># only current geo code</span></span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">get_code</span>(<span class="st">&quot;kommune&quot;</span>, <span class="at">from =</span> <span class="dv">2021</span>)</span></code></pre></div>
+</div>
+<div id="get-geo-changes" class="section level1">
+<h1>Get geo changes</h1>
 <p>You could download geo code changes via <code>get_change()</code>
 function. The example below will download municipalities codes that have
 changed from 2015 to 2021.</p>
@@ -366,15 +369,16 @@ changed from 2015 to 2021.</p>
 <div id="track-geo-changes" class="section level1">
 <h1>Track geo changes</h1>
 <p>To track all municipalities codes that have changed since 2015 to
-their current codes as in 2021 can be done as follows:</p>
+their <strong>current</strong> codes as in 2021 can be done as
+follows:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>dtt <span class="ot">&lt;-</span> <span class="fu">track_change</span>(<span class="st">&quot;kommune&quot;</span>, <span class="at">from =</span> <span class="dv">2015</span>, <span class="at">to =</span> <span class="dv">2021</span>)</span></code></pre></div>
 <p>The difference between <code>get_change()</code> and
 <code>track_change()</code> is that, the former will only download codes
-that have changed while the latter will, in addition, track these
-changes to the current codes.</p>
+that have changed while the later will, in addition, track these changes
+to the current codes.</p>
 <p>You can also track geo codes that are <em>split</em> or
-<em>merged</em> to a new geo with function <code>track_split()</code> or
-<code>track_merge()</code>.</p>
+<em>merged</em> to a new geo codes with function
+<code>track_split()</code> or <code>track_merge()</code>.</p>
 </div>
 
 
